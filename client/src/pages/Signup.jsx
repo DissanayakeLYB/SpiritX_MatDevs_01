@@ -41,22 +41,18 @@ export default function Signup() {
         const passStrength = calculateStrength(password);
         setStrength(passStrength);
 
-        // Name validation
         if (name.length > 0 && name.length < 5) {
             newErrors.name = 'Username must be at least 5 characters';
         }
 
-        // Email validation
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             newErrors.email = 'Invalid email format';
         }
 
-        // Password validation
         if (password && passStrength < 3) {
             newErrors.password = 'Password too weak';
         }
 
-        // Confirm password
         if (confirmPassword && password !== confirmPassword) {
             newErrors.confirmPassword = 'Passwords do not match';
         }
@@ -79,11 +75,11 @@ export default function Signup() {
     if (loading) return <Loader />;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
-                <div className="text-center">
+        <div className="h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+            <div className="max-h-screen max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6 text-center">
+                <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-                    <p className="text-gray-500">Join our community today</p>
+                    <p className="text-gray-500">Sign up to get started</p>
                 </div>
 
                 {errors.server && (
@@ -91,40 +87,40 @@ export default function Signup() {
                 )}
 
                 <form className="space-y-4" onSubmit={handleSubmit}>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    <div className="flex flex-col items-center">
+                        <label className="text-sm font-medium text-gray-700 mb-2">Username</label>
                         <input
                             type="text"
                             required
-                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800"
+                            className="w-3/4 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800 text-center"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <div className="flex flex-col items-center">
+                        <label className="text-sm font-medium text-gray-700 mb-2">Email</label>
                         <input
                             type="email"
                             required
-                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800"
+                            className="w-3/4 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800 text-center"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <div className="flex flex-col items-center">
+                        <label className="text-sm font-medium text-gray-700 mb-2">Password</label>
                         <input
                             type="password"
                             required
-                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800"
+                            className="w-3/4 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800 text-center"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div className="mt-2">
+                        <div className="w-3/4 mt-2">
                             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <div
                                     className={`h-full ${getStrengthColor(strength)} transition-all duration-300`}
@@ -132,32 +128,33 @@ export default function Signup() {
                                 ></div>
                             </div>
                             <div className="grid grid-cols-2 gap-2 mt-2 text-sm text-gray-600">
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-center">
                                     <span className={`mr-1 ${/[a-z]/.test(password) ? 'text-green-500' : ''}`}>•</span>
                                     Lowercase
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-center">
                                     <span className={`mr-1 ${/[A-Z]/.test(password) ? 'text-green-500' : ''}`}>•</span>
                                     Uppercase
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-center">
                                     <span className={`mr-1 ${/[0-9]/.test(password) ? 'text-green-500' : ''}`}>•</span>
                                     Number
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-center">
                                     <span className={`mr-1 ${/[^A-Za-z0-9]/.test(password) ? 'text-green-500' : ''}`}>•</span>
                                     Special
                                 </div>
                             </div>
                         </div>
+                        {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                    <div className="flex flex-col items-center">
+                        <label className="text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
                         <input
                             type="password"
                             required
-                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800"
+                            className="w-3/4 px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-800 text-center"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
@@ -168,14 +165,20 @@ export default function Signup() {
 
                     <button
                         type="submit"
-                        disabled={Object.keys(errors).length > 0 || !name || !email || !password || !confirmPassword}
+                        disabled={
+                            Object.keys(errors).length > 0 ||
+                            !name ||
+                            !email ||
+                            !password ||
+                            !confirmPassword
+                        }
                         className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity hover:scale-101"
                     >
                         Create Account
                     </button>
                 </form>
 
-                <p className="text-center text-gray-600">
+                <p className="text-gray-600">
                     Already have an account?{' '}
                     <a href="/login" className="text-blue-600 hover:underline font-medium">
                         Sign in
