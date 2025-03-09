@@ -75,8 +75,8 @@ export default function Signup() {
     if (loading) return <Loader />;
 
     return (
-        <div className="h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-            <div className="max-h-screen max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6 text-center">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+            <div className="max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6 text-center">
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
                     <p className="text-gray-500">Sign up to get started</p>
